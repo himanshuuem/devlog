@@ -1,0 +1,23 @@
+<%- include("partials/head", { title: post.title }) %>
+<main class="reader">
+  <a href="/" class="back">← All posts</a>
+  <article>
+    <header class="post-header">
+      <h1><%= post.title %></h1>
+      <p class="meta">
+        <time datetime="<%= post.createdAt %>"><%= formatDate(post.createdAt) %></time> · <%= readingTime(post.body) %> min read
+        <% if (post.updatedAt !== post.createdAt) { %>· edited <%= formatDate(post.updatedAt) %><% } %>
+      </p>
+      <p class="tags"><% post.tags.forEach((tag) => { %><a class="tag" href="/?tag=<%= encodeURIComponent(tag) %>">#<%= tag %></a><% }) %></p>
+    </header>
+    <div class="prose"><%- html %></div>
+  </article>
+  <div class="post-actions">
+    <a class="btn ghost" href="/posts/<%= post.id %>/edit">Edit</a>
+    <form method="post" action="/posts/<%= post.id %>/delete" class="delete-form">
+      <button class="btn danger" type="submit">Delete</button>
+    </form>
+  </div>
+</main>
+<script src="/confirm.js" defer></script>
+<%- include("partials/footer") %>

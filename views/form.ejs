@@ -1,0 +1,21 @@
+<%- include("partials/head", { title: mode === "new" ? "New post" : `Edit: ${values.title}` }) %>
+<main class="reader">
+  <a href="<%= mode === 'new' ? '/' : `/posts/${values.id}` %>" class="back">← Cancel</a>
+  <h1><%= mode === "new" ? "Write a new post" : "Edit post" %></h1>
+  <form class="editor" method="post" action="<%= mode === 'new' ? '/posts' : `/posts/${values.id}/edit` %>" novalidate>
+    <label>Title
+      <input name="title" value="<%= values.title %>" maxlength="120" required <%= errors.title ? 'aria-invalid=true aria-describedby=title-error' : '' %>>
+      <% if (errors.title) { %><span class="error" id="title-error"><%= errors.title %></span><% } %>
+    </label>
+    <label>Tags <small>(comma separated, up to 5)</small>
+      <input name="tags" value="<%= values.tags.join(', ') %>" placeholder="node, express" <%= errors.tags ? 'aria-invalid=true aria-describedby=tags-error' : '' %>>
+      <% if (errors.tags) { %><span class="error" id="tags-error"><%= errors.tags %></span><% } %>
+    </label>
+    <label>Body <small>(Markdown supported)</small>
+      <textarea name="body" rows="16" required <%= errors.body ? 'aria-invalid=true aria-describedby=body-error' : '' %>><%= values.body %></textarea>
+      <% if (errors.body) { %><span class="error" id="body-error"><%= errors.body %></span><% } %>
+    </label>
+    <button class="btn" type="submit"><%= mode === "new" ? "Publish" : "Save changes" %></button>
+  </form>
+</main>
+<%- include("partials/footer") %>

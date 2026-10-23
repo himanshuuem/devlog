@@ -1,0 +1,7 @@
+<%- include("partials/head", { title: "Not found" }) %>
+<main class="reader">
+  <h1>404</h1>
+  <p><%= typeof message !== "undefined" ? message : "That post doesn't exist, or it was deleted." %></p>
+  <a class="btn" href="/">Back home</a>
+</main>
+<%- include("partials/footer") %>

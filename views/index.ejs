@@ -1,0 +1,32 @@
+<%- include("partials/head", { title: activeTag ? `#${activeTag}` : "Home" }) %>
+<main class="layout">
+  <section class="feed">
+    <h1 class="feed-title">
+      <% if (query) { %>Results for “<%= query %>”<% } else if (activeTag) { %>Tagged <span class="tag">#<%= activeTag %></span><% } else { %>Latest writing<% } %>
+    </h1>
+    <% if (!posts.length) { %>
+      <div class="empty">
+        <p>No posts found.</p>
+        <a class="btn" href="/posts/new">Write the first one</a>
+      </div>
+    <% } %>
+    <% posts.forEach((post) => { %>
+      <article class="card">
+        <p class="meta"><time datetime="<%= post.createdAt %>"><%= formatDate(post.createdAt) %></time> · <%= readingTime(post.body) %> min read</p>
+        <h2><a href="/posts/<%= post.id %>"><%= post.title %></a></h2>
+        <p class="excerpt"><%= excerpt(post.body) %></p>
+        <p class="tags"><% post.tags.forEach((tag) => { %><a class="tag" href="/?tag=<%= encodeURIComponent(tag) %>">#<%= tag %></a><% }) %></p>
+      </article>
+    <% }) %>
+  </section>
+  <aside class="sidebar">
+    <h2>Tags</h2>
+    <ul class="tag-cloud">
+      <li><a class="tag <%= !activeTag ? 'active' : '' %>" href="/">all</a></li>
+      <% allTags.forEach(([tag, count]) => { %>
+        <li><a class="tag <%= tag === activeTag ? 'active' : '' %>" href="/?tag=<%= encodeURIComponent(tag) %>">#<%= tag %> <small><%= count %></small></a></li>
+      <% }) %>
+    </ul>
+  </aside>
+</main>
+<%- include("partials/footer") %>
