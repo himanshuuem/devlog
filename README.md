@@ -2,6 +2,8 @@
 
 > A Markdown blog engine built with **Express + EJS**. It has full CRUD, tags, search, reading time, sanitised HTML output, atomic JSON-file persistence and optional admin auth for public deploys.
 
+**🔗 Live demo:** https://devlog-fhwp.onrender.com/ *(free tier: the first visit after idle takes ~30–60s to wake up)*
+
 [![test](https://github.com/himanshuuem/devlog/actions/workflows/test.yml/badge.svg)](https://github.com/himanshuuem/devlog/actions/workflows/test.yml)
 ![Express](https://img.shields.io/badge/Express-5-000?logo=express)
 ![EJS](https://img.shields.io/badge/EJS-templates-B4CA65?logo=ejs&logoColor=black)
